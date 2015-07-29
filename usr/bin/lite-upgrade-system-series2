@@ -9,6 +9,9 @@
 # Ensure multi-language support
 export LANG=C
 
+# Change this one to any LL release you want to upgrade to
+current_release="2.6"
+
 # Kill off any package managers that may be running
 if [ "$(pidof synaptic)" ] 
 then
@@ -53,13 +56,16 @@ case "$arch" in
     ARRAYC+=('UPD1')
     ARRAYC+=('ERASEDPKG')
     ARRAYC+=('CRLCL')
+    ARRAYC+=('ADDPPAS')
     ARRAYC+=('INPKCL')
     ARRAYC+=('ADDWALL1')
+    ARRAYC+=('ADDTHEME1')
     ARRAYC+=('UPLSBISSUE')
     ARRAYC+=('UPGRUB')
     ARRAYC+=('LBPLYUB')
     ARRAYC+=('SYSAUTH')
     ARRAYC+=('ROOTTERTHEM')
+    ARRAYC+=('ADDROOTBASHRC1')
     ARRAYC+=('NWLOG')
     ;;
     amd64)
@@ -67,19 +73,22 @@ case "$arch" in
     ARRAYC+=('UPD1')
     ARRAYC+=('ERASEDPKG')
     ARRAYC+=('CRLCL')
+    ARRAYC+=('ADDPPAS')
     ARRAYC+=('INPKCL64')
     ARRAYC+=('ADDWALL1')
+    ARRAYC+=('ADDTHEME1')
     ARRAYC+=('UPLSBISSUE')
     ARRAYC+=('UPGRUB')
     ARRAYC+=('LBPLYUB')
     ARRAYC+=('SYSAUTH')
     ARRAYC+=('ROOTTERTHEM')
+    ARRAYC+=('ADDROOTBASHRC1')
     ARRAYC+=('NWLOG')
     ;;
 esac
 }
 
-LL24SYSTEM() {
+LL22SYSTEM() {
 # Invoke arrays
 ARRAYB=()
 ARRAYC=()
@@ -134,41 +143,119 @@ case "$arch" in
 esac
 }
 
-# Backup /etc/skel/
+LL24SYSTEM() {
+# Invoke arrays
+ARRAYB=()
+ARRAYC=()
+
+#Check the arch
+arch=$(uname -m)
+
+case "$arch" in
+    x86)    arch="x86"  ;;
+    i?86)   arch="x86"  ;;
+    amd64)  arch="amd64"    ;;
+    x86_64) arch="amd64"    ;;
+    * ) echo "Your Arch '$arch' -> Its not supported."  ;;
+esac
+
+# Populate arrays based on the arch
+case "$arch" in
+    x86)
+    ARRAYB+=('BUPETCSKEL')
+    ARRAYC+=('UPD1')
+    ARRAYC+=('ERASEDPKG')
+    ARRAYC+=('ADDPPAS')
+    ARRAYC+=('INPKCL')
+    ARRAYC+=('ADDWALL1')
+    ARRAYC+=('ADDTHEME1')
+    ARRAYC+=('UPLSBISSUE')
+    ARRAYC+=('UPGRUB')
+    ARRAYC+=('LBPLYUB')
+    ARRAYC+=('ROOTTERTHEM')
+    ARRAYC+=('ADDROOTBASHRC1')
+    ARRAYC+=('NWLOG')
+    ;;
+    amd64)
+    ARRAYB+=('BUPETCSKEL64')
+    ARRAYC+=('UPD1')
+    ARRAYC+=('ERASEDPKG')
+    ARRAYC+=('ADDPPAS')
+    ARRAYC+=('INPKCL64')
+    ARRAYC+=('ADDWALL1')
+    ARRAYC+=('ADDTHEME1')
+    ARRAYC+=('UPLSBISSUE')
+    ARRAYC+=('UPGRUB')
+    ARRAYC+=('LBPLYUB')
+    ARRAYC+=('ROOTTERTHEM')
+    ARRAYC+=('ADDROOTBASHRC1')
+    ARRAYC+=('NWLOG')
+    ;;
+esac
+}
+
+LL26SYSTEM() {
+# Invoke arrays
+ARRAYB=()
+ARRAYC=()
+
+#Check the arch
+arch=$(uname -m)
+
+case "$arch" in
+    x86)    arch="x86"  ;;
+    i?86)   arch="x86"  ;;
+    amd64)  arch="amd64"    ;;
+    x86_64) arch="amd64"    ;;
+    * ) echo "Your Arch '$arch' -> Its not supported."  ;;
+esac
+
+# Populate arrays based on the arch
+case "$arch" in
+    x86)
+    #to be added
+    ;;
+    amd64)
+    #to be added
+    ;;
+esac
+}
+
+# Backup /etc/skel/ - all releases
 BUPETCSKEL() {
        echo "#Backing up /etc/skel files..." 
         sleep 2
-        cp /etc/skel/.config/lxterminal/lxterminal.conf /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.config/xfce4/panel/whiskermenu-1.rc /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/exo-terminal-emulator.desktop /etc/skel/.llupgradebackup/2.6
+        cp /etc/skel/.config/lxterminal/lxterminal.conf /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.config/xfce4/panel/whiskermenu-1.rc /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/exo-terminal-emulator.desktop /etc/skel/.llupgradebackup/$current_release
         cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-2.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-4.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-5.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-6.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-7.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-10.desktop.backup /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-11.desktop.backup /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.config/Thunar/uca.xml /etc/skel/.llupgradebackup/2.6
+        cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-2.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-4.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-5.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-6.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-7.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-10.desktop.backup /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-11.desktop.backup /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.config/Thunar/uca.xml /etc/skel/.llupgradebackup/$current_release
 
 }
 
 BUPETCSKEL64() {
 	echo "#Backing up /etc/skel files..."
         sleep 2
-        cp /etc/skel/.config/lxterminal/lxterminal.conf /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.config/xfce4/panel/whiskermenu-1.rc /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/exo-terminal-emulator.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.local/share/applications/alacarte-made-2.desktop /etc/skel/.llupgradebackup/2.6
-        cp /etc/skel/.config/Thunar/uca.xml /etc/skel/.llupgradebackup/2.6
+        cp /etc/skel/.config/lxterminal/lxterminal.conf /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.config/xfce4/panel/whiskermenu-1.rc /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/exo-terminal-emulator.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.local/share/applications/alacarte-made-2.desktop /etc/skel/.llupgradebackup/$current_release
+        cp /etc/skel/.config/Thunar/uca.xml /etc/skel/.llupgradebackup/$current_release
 }
 
-# Get list of available updated packages
+# Get list of available updated packages - all releases
 UPD1() {
 #sed 's/^\(.\{128\}\).*/\1/' Display only the first 128 characters
 UPDATER=$( stdbuf -oL /bin/bash \-c '(sudo apt-get update \-y )' 2>&1 |
@@ -205,7 +292,7 @@ zenity --progress --percentage="$PERCENTAGE"  --title="Automating packaging defa
 unset UPDATER
 }
 
-# Add any new PPA's
+# Add any new PPA's -systemback
 ADDPPAS() {
 UPDATER=$( stdbuf -oL /bin/bash \-c '(sudo DEBIAN_FRONTEND=noninteractive apt-get upgrade -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \-y && sudo add-apt-repository ppa:nemh/systemback \-y && sudo apt-get update )' 2>&1 |
 stdbuf -oL sed -n -e 's/^\(.\{128\}\).*/\1/' -e '/\[*$/ s/^/# /p' -e '/\*$/ s/^/# /p' |
@@ -336,16 +423,19 @@ return
 #Check the version and start  the appropriate function
 LLVER=$(awk '{print $3}' /etc/llver)
 
-if [ "$LLVER" == "2.0" ]; then
-    LL20SYSTEM
+if [ "$LLVER" == "$current_release" ]; then
+    zenity --info --text="You are already running the latest release ${current_release}"
+    exit 0
+elif [ "$LLVER" == "2.0" ]; then
+   LL20SYSTEM
 elif [ "$LLVER" == "2.2" ]; then
     LL22SYSTEM
 elif [ "$LLVER" == "2.4" ]; then
     LL24SYSTEM
 elif [ "$LLVER" == "2.6" ]; then
-    zenity --info --text="You are already running the latest release"
-    exit 0
+    LL26SYSTEM
 fi
+
 
 # Check if ARRAYB is empty
 # If it is skip the execution
