@@ -228,7 +228,7 @@ BUPETCSKEL() {
         cp /etc/skel/.config/lxterminal/lxterminal.conf /etc/skel/.llupgradebackup/$current_release
         cp /etc/skel/.config/xfce4/panel/whiskermenu-1.rc /etc/skel/.llupgradebackup/$current_release
         cp /etc/skel/.local/share/applications/exo-terminal-emulator.desktop /etc/skel/.llupgradebackup/$current_release
-        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/2.6
+        cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/$current_release
         cp /etc/skel/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml /etc/skel/.llupgradebackup/$current_release
         cp /etc/skel/.local/share/applications/exo-file-manager.desktop /etc/skel/.llupgradebackup/$current_release
         cp /etc/skel/.local/share/applications/alacarte-made-2.desktop /etc/skel/.llupgradebackup/$current_release
